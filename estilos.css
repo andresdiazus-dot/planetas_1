@@ -1,0 +1,149 @@
+:root {
+  --fondo: #eef0fb;
+  --fondo-hondo: #e4e6f8;
+  --pista: #d6daf2;
+  --barra: #b7bde8;
+  --papel: #3d3b6b;
+  --marca: #8f87e3;
+  --marca-texto: #5b52c4;
+  --rosa: #f7b2c4;
+  --tenue: #66658f;
+  --linea: rgba(61, 59, 107, 0.16);
+  --fuente: "Bricolage Grotesque", "Trebuchet MS", "Segoe UI", sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; }
+
+.logo{
+width: 180px ;
+height: auto;
+display: block;
+margin: 0px auto 30px; 
+
+
+}
+
+body {
+  background: var(--fondo);
+  color: var(--papel);
+  font-family: var(--fuente);
+  line-height: 1.4;
+  min-height: 100vh;
+}
+
+.pagina {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 48px 24px 64px;
+}
+
+/* ---------- Entrada ---------- */
+.entrada label {
+  display: block;
+  font-size: 1.1rem;
+  color: var(--tenue);
+  margin-bottom: 8px;
+}
+
+.campo {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 10px;
+  border-bottom: 3px solid var(--rosa);
+}
+
+.campo input {
+  width: 4.6ch;
+  min-width: 3ch;
+  background: transparent;
+  border: 0;
+  outline: 0;
+  color: var(--papel);
+  font: 800 3rem/1.1 var(--fuente);
+  field-sizing: content;
+  -moz-appearance: textfield;
+}
+.campo input::-webkit-outer-spin-button,
+.campo input::-webkit-inner-spin-button { -webkit-appearance: none; }
+
+.campo span { font-size: 1.5rem; color: var(--tenue); }
+.campo:focus-within { border-bottom-color: var(--papel); }
+
+/* ---------- Lectura grande ---------- */
+.lectura { margin: 48px 0 56px; }
+
+.frase { font-size: 1.4rem; }
+.frase strong { font-weight: 700; }
+
+.cifra {
+  font-weight: 800;
+  font-size: clamp(5rem, 22vw, 11rem);
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  color: var(--marca);
+}
+.cifra small {
+  font-size: 0.22em;
+  font-weight: 700;
+  letter-spacing: 0;
+  margin-left: 0.2em;
+  color: var(--papel);
+}
+
+.detalle { margin-top: 12px; color: var(--tenue); font-size: 1.05rem; }
+
+/* ---------- Lista comparativa ---------- */
+.mundos h2 {
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: var(--tenue);
+  margin-bottom: 12px;
+}
+
+.lista { list-style: none; padding: 0; border-top: 1px solid var(--linea); }
+
+.fila {
+  display: grid;
+  grid-template-columns: 6.5rem 1fr 5.5rem;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  padding: 12px 8px;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--linea);
+  color: var(--papel);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.fila:hover { background: var(--fondo-hondo); }
+.fila:focus-visible { outline: 3px solid var(--marca); outline-offset: -3px; }
+
+.fila .mundo { font-weight: 700; }
+
+.fila .pista { height: 14px; background: var(--pista); border-radius: 7px; overflow: hidden; }
+.fila .barra {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: var(--barra);
+  border-radius: 7px;
+  transition: width 0.45s ease;
+}
+
+.fila .valor { text-align: right; font-weight: 700; font-variant-numeric: tabular-nums; }
+
+.fila[aria-pressed="true"] { background: var(--fondo-hondo); }
+.fila[aria-pressed="true"] .barra { background: var(--rosa); }
+.fila[aria-pressed="true"] .mundo { color: var(--marca-texto); }
+
+.nota { margin-top: 28px; font-size: 0.95rem; color: var(--tenue); }
+
+@media (max-width: 520px) {
+  .fila { grid-template-columns: 5.2rem 1fr 4.6rem; gap: 10px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fila .barra { transition: none; }
+}

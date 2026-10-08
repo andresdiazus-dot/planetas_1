@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Báscula cósmica</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+  <main class="pagina">
+    <nav>
+        <img id="logo" src="logo.png" alt="logo.png"> 
+        <li></li>
+        <li></li>
+        <li></li>
+    </nav>
+
+    <div class="entrada">
+      <label for="peso">Si en la Tierra pesas</label>
+      <div class="campo">
+        <input id="peso" type="number" inputmode="decimal" value="70" min="1" step="0.1">
+        <span>kg</span>
+      </div>
+    </div>
+
+    <section class="lectura" aria-live="polite">
+      <p class="frase">En <strong id="nombre">Marte</strong> marcarías</p>
+      <p class="cifra"><span id="resultado">26,6</span><small>kg</small></p>
+      <p class="detalle" id="detalle">16,4 kg menos que en la Tierra · gravedad de 3,71 m/s²</p>
+    </section>
+
+    <section class="mundos">
+      <h2>Compara todos los mundos</h2>
+      <ul id="lista" class="lista"></ul>
+    </section>
+
+    <p class="nota">
+      Cálculo: peso en el mundo = tu peso en la Tierra × (gravedad del mundo ÷ 9,81).
+    </p>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
