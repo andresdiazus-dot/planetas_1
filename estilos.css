@@ -14,15 +14,6 @@
 
 * { box-sizing: border-box; margin: 0; }
 
-.logo{
-width: 180px ;
-height: auto;
-display: block;
-margin: 0px auto 30px; 
-
-
-}
-
 body {
   background: var(--fondo);
   color: var(--papel);
@@ -35,6 +26,63 @@ body {
   max-width: 880px;
   margin: 0 auto;
   padding: 48px 24px 64px;
+}
+
+/* ---------- Navbar ---------- */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  margin-bottom: 55px;
+}
+
+.marca {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--papel);
+  font-size: 1rem;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+#logo {
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
+  display: block;
+}
+
+.menu {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu a {
+  display: block;
+  padding: 9px 14px;
+  border-radius: 12px;
+  text-decoration: none;
+  color: var(--tenue);
+  font-size: 0.95rem;
+  font-weight: 700;
+  transition: background 0.25s ease,
+              color 0.25s ease,
+              transform 0.25s ease;
+}
+
+.menu a:hover {
+  background: var(--fondo-hondo);
+  color: var(--marca-texto);
+  transform: translateY(-2px);
 }
 
 /* ---------- Entrada ---------- */
@@ -92,6 +140,194 @@ body {
 
 .detalle { margin-top: 12px; color: var(--tenue); font-size: 1.05rem; }
 
+.resultado-planeta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.resultado-texto {
+  flex: 1;
+  min-width: 0;
+}
+
+/* ---------- Planeta animado ---------- */
+.planeta-escena {
+  width: 210px;
+  height: 210px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  position: relative;
+  overflow: hidden;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(143, 135, 227, 0.17),
+    rgba(238, 240, 251, 0) 72%
+  );
+}
+
+.planeta-globo {
+  --d: 140px;
+  width: var(--d);
+  height: var(--d);
+  position: relative;
+  border-radius: 50%;
+  overflow: visible;
+
+  background:
+    repeating-linear-gradient(
+      12deg,
+      transparent 0 15px,
+      rgba(255,255,255,0.13) 16px 20px,
+      transparent 21px 30px
+    ),
+    linear-gradient(110deg, #a34e35, #e79a64, #b9573d, #74352f);
+
+  box-shadow:
+    inset -20px -8px 30px rgba(25, 15, 45, 0.48),
+    inset 8px 4px 18px rgba(255,255,255,0.24),
+    0 0 35px rgba(143, 135, 227, 0.25);
+
+  animation: planeta-giro 12s linear infinite;
+}
+
+/* Iluminación */
+.planeta-globo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: linear-gradient(
+    90deg,
+    transparent 40%,
+    rgba(255,255,255,0.12) 50%,
+    transparent 65%
+  );
+  pointer-events: none;
+}
+
+/* Saturno: anillos */
+.planeta-escena.saturno .planeta-globo::before {
+  content: "";
+  position: absolute;
+  width: 190px;
+  height: 55px;
+  top: 43px;
+  left: -25px;
+  border: 9px solid #d8c5a8;
+  border-left-color: #a997cc;
+  border-right-color: #f2dfbd;
+  border-radius: 50%;
+  transform: rotate(-20deg);
+  box-shadow: 0 0 8px rgba(61, 59, 107, 0.25);
+}
+
+/* Apariencias según el mundo */
+.planeta-escena.mercurio .planeta-globo {
+  background:
+    repeating-linear-gradient(
+      35deg,
+      transparent 0 17px,
+      rgba(255,255,255,0.13) 18px 21px,
+      transparent 22px 32px
+    ),
+    linear-gradient(120deg, #aaa8b7, #e0d8ce, #777887);
+}
+
+.planeta-escena.venus .planeta-globo {
+  background:
+    repeating-linear-gradient(
+      160deg,
+      transparent 0 18px,
+      rgba(255,255,255,0.18) 19px 23px,
+      transparent 24px 34px
+    ),
+    linear-gradient(120deg, #b87838, #f5d49a, #b65d30);
+}
+
+.planeta-escena.tierra .planeta-globo {
+  background:
+    radial-gradient(ellipse at 35% 35%, #54d9be 0 12%, transparent 13%),
+    radial-gradient(ellipse at 65% 60%, #58bd81 0 18%, transparent 19%),
+    linear-gradient(135deg, #70d7f2, #2774c9 55%, #172c72);
+}
+
+.planeta-escena.luna .planeta-globo {
+  background:
+    radial-gradient(circle at 30% 35%, rgba(90,90,100,0.35) 0 9%, transparent 10%),
+    radial-gradient(circle at 65% 60%, rgba(90,90,100,0.30) 0 13%, transparent 14%),
+    radial-gradient(circle at 45% 78%, rgba(90,90,100,0.28) 0 7%, transparent 8%),
+    linear-gradient(120deg, #d7d6df, #f4f2ee, #9a99a8);
+}
+
+.planeta-escena.marte .planeta-globo {
+  background:
+    repeating-linear-gradient(
+      15deg,
+      transparent 0 15px,
+      rgba(255,215,170,0.2) 16px 19px,
+      transparent 20px 30px
+    ),
+    linear-gradient(120deg, #a34e35, #e79a64, #74352f);
+}
+
+.planeta-escena.jupiter .planeta-globo {
+  background:
+    repeating-linear-gradient(
+      0deg,
+      #b97852 0 12px,
+      #f1d6b2 13px 24px,
+      #a85e40 25px 33px,
+      #e4b58a 34px 42px
+    );
+}
+
+.planeta-escena.saturno .planeta-globo {
+  background:
+    repeating-linear-gradient(
+      0deg,
+      #b59a75 0 12px,
+      #f0dfbd 13px 24px,
+      #c5aa82 25px 34px
+    );
+}
+
+.planeta-escena.urano .planeta-globo {
+  background:
+    repeating-linear-gradient(
+      0deg,
+      transparent 0 20px,
+      rgba(255,255,255,0.18) 21px 24px,
+      transparent 25px 36px
+    ),
+    linear-gradient(120deg, #65c9d8, #c0f2ed, #529ebf);
+}
+
+.planeta-escena.neptuno .planeta-globo {
+  background:
+    repeating-linear-gradient(
+      0deg,
+      transparent 0 18px,
+      rgba(255,255,255,0.15) 19px 22px,
+      transparent 23px 35px
+    ),
+    linear-gradient(120deg, #193d9d, #5087f2, #17245f);
+}
+
+.planeta-escena.pluton .planeta-globo {
+  background:
+    radial-gradient(ellipse at 60% 55%, rgba(255,245,230,0.55) 0 22%, transparent 23%),
+    linear-gradient(120deg, #8a6a58, #d9bfa3, #5d4540);
+}
+
+@keyframes planeta-giro {
+  from { background-position: 0 0; }
+  to   { background-position: 0 var(--d); }
+}
+
 /* ---------- Lista comparativa ---------- */
 .mundos h2 {
   font-size: 1.1rem;
@@ -140,10 +376,115 @@ body {
 
 .nota { margin-top: 28px; font-size: 0.95rem; color: var(--tenue); }
 
+/* ---------- Celulares ---------- */
+@media (max-width: 600px) {
+  .resultado-planeta { gap: 8px; }
+
+  .planeta-escena {
+    width: 140px;
+    height: 140px;
+  }
+
+  .planeta-globo {
+    --d: 95px;
+    width: var(--d);
+    height: var(--d);
+  }
+
+  .planeta-escena.saturno .planeta-globo::before {
+    width: 125px;
+    height: 38px;
+    top: 28px;
+    left: -15px;
+    border-width: 6px;
+  }
+
+  .cifra { font-size: clamp(3.5rem, 12vw, 6rem); }
+
+  .detalle { font-size: 0.85rem; }
+}
+
 @media (max-width: 520px) {
+  .navbar {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+
+  .menu {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+
+  .menu a {
+    padding: 8px 10px;
+    font-size: 0.88rem;
+  }
+
   .fila { grid-template-columns: 5.2rem 1fr 4.6rem; gap: 10px; }
 }
 
+/* ---------- Menos movimiento ---------- */
 @media (prefers-reduced-motion: reduce) {
   .fila .barra { transition: none; }
+  .planeta-globo { animation: none; }
+}
+/* ---------- Selector de idioma ---------- */
+.idioma { position: relative; }
+
+.idioma-btn {
+  display: block;
+  padding: 9px 14px;
+  border: 0;
+  border-radius: 12px;
+  background: transparent;
+  color: var(--tenue);
+  font: 700 0.95rem var(--fuente);
+  cursor: pointer;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+.idioma-btn:hover,
+.idioma-btn[aria-expanded="true"] {
+  background: var(--fondo-hondo);
+  color: var(--marca-texto);
+}
+
+.idioma-btn:focus-visible { outline: 3px solid var(--marca); outline-offset: 2px; }
+
+.idioma-menu {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 6px);
+  min-width: 140px;
+  list-style: none;
+  padding: 6px;
+  background: #fff;
+  border: 1px solid var(--linea);
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(61, 59, 107, 0.15);
+  z-index: 10;
+}
+
+.idioma-menu[hidden] { display: none; }
+
+.idioma-menu button {
+  width: 100%;
+  padding: 8px 12px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--papel);
+  font: 700 0.95rem var(--fuente);
+  text-align: left;
+  cursor: pointer;
+}
+
+.idioma-menu button:hover { background: var(--fondo-hondo); }
+.idioma-menu button[aria-pressed="true"] { color: var(--marca-texto); }
+
+@media (max-width: 520px) {
+  .idioma-btn { padding: 8px 10px; font-size: 0.88rem; }
+  .idioma-menu { right: auto; left: 0; }
 }
